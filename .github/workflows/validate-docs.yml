@@ -1,0 +1,16 @@
+name: Validate Docs Structure
+on: [push, pull_request]
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Verify docs folder exists
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "Error: /docs folder is missing!"
+            exit 1
+          fi
+          ls -la docs/

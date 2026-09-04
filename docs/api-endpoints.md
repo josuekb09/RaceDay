@@ -1,0 +1,14 @@
+# RaceDay - API Endpoint Plan
+
+| HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **POST** | `/api/auth/register` | Registers a new user (Organiser or Participant) in the system. | None (Public) | `{ "username": "string", "email": "string", "password": "string", "role": "string", "firstName": "string", "lastName": "string" }` | `201 Created` - Returns success message and user details.<br>`400 Bad Request` - Validation error. |
+| **POST** | `/api/auth/login` | Authenticates user credentials and generates a secure session token. | None (Public) | `{ "email": "string", "password": "string" }` | `200 OK` - Returns JWT token.<br>`401 Unauthorized` - Invalid credentials. |
+| **GET** | `/api/users/profile` | Retrieves the profile details of the currently logged-in user. | Member (Logged in) | None | `200 OK` - Returns user profile object.<br>`401 Unauthorized` - Missing token. |
+| **GET** | `/api/events` | Retrieves a list of all scheduled upcoming racing and walking events. | None (Public) | None | `200 OK` - Returns array of event objects. |
+| **POST** | `/api/events` | Creates a new event entry managed by an organiser. | Organiser | `{ "title": "string", "description": "string", "eventDate": "datetime", "location": "string", "registrationDeadline": "datetime" }` | `201 Created` - Returns created event.<br>`403 Forbidden` - Unauthorized role. |
+| **POST** | `/api/events/{eventId}/categories` | Adds a race distance or category to a specific event. | Organiser | `{ "categoryName": "string", "distanceKm": "decimal", "price": "decimal" }` | `201 Created` - Returns category details.<br>`404 Not Found` - Event does not exist. |
+| **POST** | `/api/events/enrol` | Enrols a participant into a specific event category. | Participant | `{ "participantId": "int", "categoryId": "int" }` | `201 Created` - Returns enrolment record with due date.<br>`409 Conflict` - Already enrolled. |
+| **GET** | `/api/events/enrolments/my-enrolments` | Retrieves all event enrolments belonging to the logged-in participant. | Participant | None | `200 OK` - Returns list of active enrolments. |
+| **POST** | `/api/results` | Captures participant finish times and official positions after an event. | Organiser | `{ "enrolmentId": "int", "finishTime": "time", "position": "int" }` | `201 Created` - Returns recorded result.<br>`404 Not Found` - Enrolment ID invalid. |
+| **GET** | `/api/results/participant/{participantId}` | Tracks personal historical results and performance for a participant. | Participant (or Public) | None | `200 OK` - Returns array of performance records. |
