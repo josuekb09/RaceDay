@@ -1,0 +1,19 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RaceDayApi.Models
+{
+    public class Result
+    {
+        [Key]
+        public int ResultId { get; set; }
+
+        [ForeignKey("Enrolment")]
+        public int EnrolmentId { get; set; }
+        public Enrolment? Enrolment { get; set; }
+
+        public TimeSpan FinishTime { get; set; }
+
+        public int FinishingPosition { get; set; }
+    }
+}
