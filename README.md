@@ -15,3 +15,6 @@ The MVC web application is containerised using Docker. To build and run the appl
 1. **Build the Docker image:**
    ```bash
    docker build -t racedaymvc .
+
+   ### Part 3: Video Demonstration
+- **YouTube Video Link:** https://youtu.be/YYlesW84rAE
