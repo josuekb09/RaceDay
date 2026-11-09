@@ -1,0 +1,53 @@
+﻿@model RaceDayMvc.Models.EventViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-4">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <div class="row">
+        <div class="col-md-8">
+            @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
+            {
+                <img src="@Model.BannerImageUrl" class="img-fluid rounded shadow-sm mb-4" alt="Event Banner">
+            }
+            <h1 class="fw-bold text-primary">@Model.Name</h1>
+            <p class="lead">@Model.Description</p>
+            <hr />
+            <h5>Event Details</h5>
+            <ul>
+                <li><strong>Date:</strong> @Model.Date.ToString("f")</li>
+                <li><strong>Location:</strong> @Model.Location</li>
+                <li><strong>Type:</strong> @Model.EventType</li>
+                <li><strong>Distance:</strong> @Model.Distance km</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Enroll Now</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Enroll" method="post">
+                        <input type="hidden" name="eventId" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Select Category</label>
+                            <select name="category" class="form-select" required>
+                                <option value="">Choose a category...</option>
+                                <option value="Open">Open</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Under 20">Under 20</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 fw-bold">Confirm Enrollment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RaceDayMvc.Models.EnrollmentViewModel>
+@{
+    ViewData["Title"] = "My Events";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary fw-bold mb-4">My Enrolled Events</h2>
+
+    <table class="table table-hover shadow-sm align-middle">
+        <thead class="table-primary">
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@enrollment.EventName</td>
+                    <td>@enrollment.EventDate.ToShortDateString()</td>
+                    <td>@enrollment.Category</td>
+                    <td>
+                        @if (enrollment.Status == "Confirmed")
+                        {
+                            <span class="badge bg-success">Confirmed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

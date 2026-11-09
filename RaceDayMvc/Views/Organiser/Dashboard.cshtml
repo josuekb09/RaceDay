@@ -1,0 +1,68 @@
+﻿@model RaceDayMvc.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="text-success fw-bold">Organiser Dashboard</h2>
+            <p class="text-muted">Welcome back. Here is the overview of your events.</p>
+        </div>
+    </div>
+
+    <div class="row text-center mb-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Total Events Created</h5>
+                    <h1 class="display-4 fw-bold">@Model.TotalEvents</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Total Enrollments</h5>
+                    <h1 class="display-4 fw-bold">@Model.TotalEnrollments</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h4 class="mb-3">Upcoming Events</h4>
+            <table class="table table-hover shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.UpcomingEvents != null && Model.UpcomingEvents.Any())
+                    {
+                        foreach (var ev in Model.UpcomingEvents)
+                        {
+                            <tr>
+                                <td>@ev.Name</td>
+                                <td>@ev.Date.ToShortDateString()</td>
+                                <td>@ev.Location</td>
+                                <td><span class="badge bg-info text-dark">@ev.EventType</span></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">No upcoming events found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

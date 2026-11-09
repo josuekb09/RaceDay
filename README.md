@@ -1,17 +1,17 @@
-# RaceDay System - Portfolio of Evidence (Part 1)
-Kabuya Tambwe Josue: ST10468057
+# RaceDay System - Portfolio of Evidence (Part 1, 2, and 3)
+**Student Name:** Kabuya Tambwe Josue  
+**Student Number:** ST10468057  
 
 ## Overview
-RaceDay is a full-stack web-based event management system designed specifically for the South African road running, walking, and cycling community.
+RaceDay is a full-stack web-based event management system designed specifically for the South African road running, walking, and cycling community. By Part 3, this system consists of a RESTful API connected to a SQL Server database, Azure Blob Storage for cloud image handling, and a fully containerised ASP.NET Core MVC front-end application.
 
 ## Roles Supported
-* **Organiser**: Can create, edit, and delete events, manage event categories, capture participant results, and view all event enrolments.
-* **Participant**: Can create an account, browse events, enter an event by selecting a category, view own enrolments, and track personal results.
+- **Organiser**: Can create, edit, and delete events, manage event categories, capture participant results, upload event banners, and view all event enrolments.
+- **Participant**: Can create an account, browse events, enter an event by selecting a category, view own enrolments, and track personal results.
 
-## Documentation Included (/docs)
-* **Entity Relationship Diagram (`erd.png`)**: Complete database architecture covering 6 distinct entities, primary/foreign keys, and cardinalities.
-* **API Endpoint Plan (`api-endpoints.md`)**: Comprehensive planning document detailing routes, HTTP methods, role access control, request bodies, and expected response codes.
-* **SQL Database Script (`raceday_schema.sql`)**: Fully executable database schema and seed data script written for SQL Server Management Studio (SSMS).
+## Setup and Run Instructions (Docker)
+The MVC web application is containerised using Docker. To build and run the application locally, open your terminal inside the `RaceDayMvc` directory (where the `Dockerfile` is located) and execute the following commands:
 
-## CI/CD Status
-* GitHub Actions workflow validates repository and docs structure automatically on push.
+1. **Build the Docker image:**
+   ```bash
+   docker build -t racedaymvc .
